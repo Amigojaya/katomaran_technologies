@@ -1,0 +1,35 @@
+<div class="container">
+	<h3>Users (<%= @users.count %>)</h3>
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Email</th>
+	      <th scope="col">Role</th>
+	      <th scope="col">Create on</th>
+	      <th scope="col">Blocked</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% @users.each_with_index do |user, index| %>
+	  		<tr>
+		      <th scope="row"><%= index+1 %></th>
+		      <td><%= user.email %></td>
+		      <td><%= user.role %></td>
+		      <td><%= user.created_at.strftime("%d-%m-%Y") %></td>
+		      <td><%= user.is_blocked %></td>
+		      <td>
+			      <%= form_tag(block_user_path, method: :put) do %>
+				      <%= hidden_field :user, :id, value: user.id %>
+				      <%= hidden_field :user, :is_blocked, value: !user.is_blocked %>
+				      <% button_name = user.is_blocked ? 'Un-Block' : 'Block' %>
+							<%= submit_tag button_name, class:"btn btn-sm btn-primary", data: { turbolinks: false }  %>
+						<% end %>
+					</td>
+		    </tr>
+			<% end %>
+	  </tbody>
+	</table>
+		
+</div>
