@@ -1,0 +1,32 @@
+<div class="container">
+	<h1>Welcome to Ticket Booking Application</h1>
+	<div id="carouselExampleIndicators" class="carousel slide">
+	  <div class="carousel-indicators">
+	    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+	    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+	    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	  </div>
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	      <img src="https://i.ibb.co/y854MN4/6346166.jpg" class="d-block w-100" style='height: 600px'>
+	    </div>
+	    <div class="carousel-item">
+	      <img src="https://i.ibb.co/y854MN4/6346166.jpg" class="d-block w-100" style='height: 600px'>
+	    </div>
+	    <div class="carousel-item">
+	      <img src="https://i.ibb.co/y854MN4/6346166.jpg" class="d-block w-100" style='height: 600px'>
+	    </div>
+	  </div>
+	  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Next</span>
+	  </button>
+	</div>
+
+	<h5>Please log-in to your account For ticket bookings <%= link_to 'Log-in', new_user_session_path, class: 'btn btn-sm btn-success mt-1'%></h5>
+	<h5>Or Sign-up to Create account with us <%= link_to 'Sign-up', new_user_registration_path, class: 'btn btn-sm btn-warning'%></h5>
+</div>
