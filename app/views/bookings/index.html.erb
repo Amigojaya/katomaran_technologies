@@ -1,0 +1,20 @@
+<div class="container">
+
+  <h1>Bookings (<%= @bookings.count %>)</h1>
+  <%= link_to "+ Creating Booking", new_booking_path, class: 'btn btn-success my-1' %>
+
+  <div class="row">
+    <% @bookings.each do |booking| %>
+      <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body">
+            <% button_color = get_button_color(booking.status) %>
+            <h5 class="card-title"><%= booking.booking_date.strftime("%m-%d-%Y %l:%M %p") %> <a href="#" class="btn <%=button_color%>"><%= booking.status.capitalize %></a></h5>
+          </div>
+        </div>
+      </div>      
+    <% end %>
+
+  </div>
+
+</div>
