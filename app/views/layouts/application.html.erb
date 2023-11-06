@@ -30,6 +30,11 @@
           <% end %>
           <% if current_user.present? && current_user.role == 'admin' %>
             <li class="nav-item">
+              <%= link_to "Block Users", users_list_for_admins_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% if current_user.present? && current_user.role == 'admin' %>
+            <li class="nav-item">
               <a class="nav-link" href="#">Approve Tickets</a>
             </li>
           <% end %>
