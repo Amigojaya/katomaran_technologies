@@ -40,7 +40,7 @@
           <% end %>
           <% if current_user.present? && current_user.role == 'user' %>
             <li class="nav-item">
-              <a class="nav-link" href="#">Book Ticket</a>
+              <%= link_to "Book slot", bookings_path, class: "nav-link" %>
             </li>
           <% end %>
         </ul>

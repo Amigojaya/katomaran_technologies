@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>New booking</h1>
+
+  <%= render "form", booking: @booking %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to bookings", bookings_path, class: 'btn btn-sm btn-warning' %>
+  </div>
+</div>
