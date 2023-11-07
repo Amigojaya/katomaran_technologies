@@ -1,0 +1,23 @@
+<div class="container">
+	<h1>Search (<%= @bookings.count %>)</h1>
+  <% if policy(current_user).all_bookings? %>
+    <%= link_to 'Back to Bookings', all_bookings_bookings_path, class: 'btn btn-sm btn-warning mb-2' %>
+  <% else %>
+    <%= link_to 'Back to Bookings', bookings_path, class: 'btn btn-sm btn-warning mb-2' %>
+  <% end %>
+  <div class="row">
+  	<% @bookings.each do |booking| %>
+      <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body">
+            <% button_color = get_button_color(booking.status) %>
+            <h5 class="card-title"><%= booking.booking_date.strftime("%m-%d-%Y %l:%M %p") %> <a href="#" class="btn btn-sm <%=button_color%>"><%= booking.status&.capitalize %></a></h5>
+            <% if policy(current_user).update? %>
+	            <p><%= link_to 'Review', edit_booking_path(booking), class: 'btn btn-primary' %> Booked by <%= booking.user.email %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>      
+    <% end %>
+  </div>
+</div>

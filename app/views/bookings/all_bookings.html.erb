@@ -1,6 +1,13 @@
 <div class="container">
 
   <h1>Review Bookings (<%= @bookings.count %>)</h1>
+  <div class="mb-3">
+    <%= form_tag(search_bookings_path, method: :get) do %>
+      <%= label_tag :search  %>
+      <%= text_field_tag :search  %>
+      <%= submit_tag 'search', class: 'btn btn-sm btn-dark'  %>
+    <% end %>
+  </div>
 
   <div class="row">
     <% @bookings.each do |booking| %>
