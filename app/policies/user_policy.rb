@@ -16,11 +16,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-  	user.user?
+  	user.user? && !user.is_blocked
   end
 
   def new?
-  	user.user?
+  	user.user? && !user.is_blocked
   end
 
   def edit?

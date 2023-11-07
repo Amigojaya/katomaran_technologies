@@ -5,11 +5,12 @@
 
   <div class="row">
     <% @bookings.each do |booking| %>
-      <div class="col-sm-4 mb-3 mb-sm-0">
+      <div class="col-sm-4 mb-3 mb-1">
         <div class="card">
           <div class="card-body">
             <% button_color = get_button_color(booking.status) %>
-            <h5 class="card-title"><%= booking.booking_date.strftime("%m-%d-%Y %l:%M %p") %> <a href="#" class="btn <%=button_color%>"><%= booking.status&.capitalize %></a></h5>
+            <h5 class="card-title"><%= booking.name %></h5>
+            <p class="card-title"><%= booking.booking_date.strftime("%m-%d-%Y %l:%M %p") %> <a href="#" class="btn <%=button_color%>"><%= booking.status&.capitalize %></a></p>
           </div>
         </div>
       </div>      

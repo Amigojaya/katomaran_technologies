@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# Super admin
+User.create(email: 'super_admin@gmail.com', password: 'Password123@', role: 'super_admin')
+
+# Admin
+User.create(email: 'admin@gmail.com', password: 'Password123@', role: 'admin')
+
+# user
+user = User.create(email: 'user@gmail.com', password: 'Password123@')
+
+
+# Creating sample Bookings data
+
+Booking.create(name: "First Booking", booking_date: Time.now + 2.days, user_id: user.id)
+
+# Reindexing because of elastic serach
+Booking.reindex
