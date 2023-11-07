@@ -4,11 +4,22 @@ class BookingsController < ApplicationController
   include BookingsHelper
 
   def index
-    @bookings = current_user.bookings
+    @bookings = current_user.bookings.order(:created_at)
   end
 
   def new
     @booking = Booking.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @booking.update(status: params[:booking][:status])
+      redirect_to all_bookings_bookings_path, notice: 'Booking Status was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def create
@@ -23,6 +34,10 @@ class BookingsController < ApplicationController
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def all_bookings
+    @bookings = Booking.all.order(:created_at)
   end
 
   private

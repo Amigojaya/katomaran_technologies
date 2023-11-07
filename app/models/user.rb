@@ -5,4 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookings
+
+  def admin?
+    role == 'admin'
+  end
+
+  def super_admin?
+    role == 'super_admin'
+  end
+
+  def user?
+    role == 'user'
+  end
 end

@@ -1,0 +1,1 @@
+bookings_policy.rb

@@ -2,11 +2,11 @@ module BookingsHelper
 	def get_button_color(status)
 		case status
 		when 'pending'
-			'btn-warning'
+			'btn-outline-warning'
 		when 'approved'
-		  'btn-success'
+		  'btn-outline-success'
 		when 'rejected'
-			'btn-danger'
+			'btn-outline-danger'
 		end
 	end
 end

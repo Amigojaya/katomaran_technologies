@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>New booking</h1>
+
+  <%= form_with(model: @booking) do |form| %>
+
+    <div>
+      <%= form.label :status, style: "display: block" %>
+      <%= form.select :status, options_for_select([['Approved', 'approved'], ['Rejected', 'rejected']])  %>
+    </div>
+
+    <div>
+      <%= form.submit 'Submit', class: 'btn btn-success my-1' %>
+    </div>
+  <% end %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to bookings", all_bookings_bookings_path, class: 'btn btn-sm btn-warning' %>
+  </div>
+</div>
