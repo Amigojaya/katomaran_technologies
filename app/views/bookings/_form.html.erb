@@ -12,6 +12,11 @@
   <% end %>
 
   <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div><br>
+
+  <div>
     <%= form.label :booking_date, style: "display: block" %>
     <%= form.datetime_field :booking_date %>
   </div>

@@ -12,47 +12,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Ticket Booking</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link active" %>
-          </li>
-          <% if current_user.present? && current_user.role == 'super_admin' %>
-            <li class="nav-item">
-              <%= link_to "Assign Roles", assign_roles_path, class: "nav-link" %>
-            </li>
-          <% end %>
-          <% if current_user.present? && current_user.role == 'admin' %>
-            <li class="nav-item">
-              <%= link_to "Block Users", users_list_for_admins_path, class: "nav-link" %>
-            </li>
-          <% end %>
-          <% if current_user.present? && current_user.role == 'admin' %>
-            <li class="nav-item">
-              <%= link_to "Approve Bookings", all_bookings_bookings_path, class: "nav-link" %>
-            </li>
-          <% end %>
-          <% if current_user.present? && current_user.role == 'user' %>
-            <li class="nav-item">
-              <%= link_to "Book slot", bookings_path, class: "nav-link" %>
-            </li>
-          <% end %>
-        </ul>
-        <% if current_user.present? %>
-          <p><%= current_user.email %> (<%= current_user.role %>)</p>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger mx-2" %>
-        <% else %>
-          <%= link_to 'Log-in', new_user_session_path , class: "btn btn-success" %>
-        <% end %>
-      </div>
-    </div>
-  </nav>
+    <%= render "layouts/nav_bar" %>
 
     <center><span class="notice text-danger"><%= notice %></span>
     <span class="alert text-danger"><%= alert %></span></center>

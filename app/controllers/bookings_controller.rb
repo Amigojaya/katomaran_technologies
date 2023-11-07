@@ -7,12 +7,18 @@ class BookingsController < ApplicationController
     authorize current_user, policy_class: UserPolicy
 
     @bookings = current_user.bookings.where('booking_date > ?', Date.today).order(:created_at)
+  rescue Pundit::NotAuthorizedError
+    flash[:alert] = "You are Blocked or Not authorized to this page"
+    redirect_to root_path
   end
 
   def new
     authorize current_user, policy_class: UserPolicy
 
     @booking = Booking.new
+  rescue Pundit::NotAuthorizedError
+    flash[:alert] = "You are Blocked or Not authorized to this page"
+    redirect_to root_path
   end
 
   def edit
@@ -34,14 +40,10 @@ class BookingsController < ApplicationController
 
     @booking = Booking.new(booking_params.merge({user_id: current_user.id}))
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to bookings_path, notice: "Booking was successfully created." }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      redirect_to bookings_path, notice: "Booking was successfully created." 
+    else
+      render :new, status: :unprocessable_entity 
     end
   end
 
@@ -54,8 +56,6 @@ class BookingsController < ApplicationController
   def search
     @bookings = Booking.search(
       params[:search],
-      fields: [:name],
-      match: :word_start,
       where: {
         booking_date: { gt: Date.today }
       }
@@ -69,6 +69,6 @@ class BookingsController < ApplicationController
     end
 
     def booking_params
-      params.require(:booking).permit(:booking_date)
+      params.require(:booking).permit(:booking_date, :name)
     end
 end
