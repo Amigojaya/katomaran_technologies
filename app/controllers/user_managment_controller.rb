@@ -2,6 +2,8 @@ class UserManagmentController < ApplicationController
 	before_action :authenticate_user!
 
 	def assign_roles
+		authorize current_user, policy_class: UsersPolicy
+
 		@users = User.where.not(id: current_user.id)
 	end
 
