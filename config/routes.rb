@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :bookings, only: %i[index new create edit update] do
     collection do
       get 'all_bookings'
+      get 'search'
     end
   end
   devise_for :users

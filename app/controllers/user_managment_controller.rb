@@ -2,12 +2,14 @@ class UserManagmentController < ApplicationController
 	before_action :authenticate_user!
 
 	def assign_roles
-		authorize current_user, policy_class: UsersPolicy
+		authorize current_user, policy_class: UserPolicy
 
 		@users = User.where.not(id: current_user.id)
 	end
 
 	def update_role
+		authorize current_user, policy_class: UserPolicy
+
 		user = User.find(params[:user][:id])
 
 		if user.present?
@@ -19,10 +21,14 @@ class UserManagmentController < ApplicationController
 	end
 
 	def users_list_for_admins
+		authorize current_user, policy_class: UserPolicy
+
 		@users = User.where(role: 'user')
 	end
 
 	def block_user
+		authorize current_user, policy_class: UserPolicy
+		
 		user = User.find(params[:user][:id])
 
 		if user.present?

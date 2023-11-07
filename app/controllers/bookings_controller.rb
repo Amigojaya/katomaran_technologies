@@ -4,17 +4,24 @@ class BookingsController < ApplicationController
   include BookingsHelper
 
   def index
-    @bookings = current_user.bookings.order(:created_at)
+    authorize current_user, policy_class: UserPolicy
+
+    @bookings = current_user.bookings.where('booking_date > ?', Date.today).order(:created_at)
   end
 
   def new
+    authorize current_user, policy_class: UserPolicy
+
     @booking = Booking.new
   end
 
   def edit
+    authorize current_user, policy_class: UserPolicy
   end
 
   def update
+    authorize current_user, policy_class: UserPolicy
+
     if @booking.update(status: params[:booking][:status])
       redirect_to all_bookings_bookings_path, notice: 'Booking Status was successfully updated.'
     else
@@ -23,6 +30,8 @@ class BookingsController < ApplicationController
   end
 
   def create
+    authorize current_user, policy_class: UserPolicy
+
     @booking = Booking.new(booking_params.merge({user_id: current_user.id}))
 
     respond_to do |format|
@@ -37,7 +46,21 @@ class BookingsController < ApplicationController
   end
 
   def all_bookings
-    @bookings = Booking.all.order(:created_at)
+    authorize current_user, policy_class: UserPolicy
+    
+    @bookings = Booking.where('booking_date > ?', Date.today).order(:created_at)
+  end
+
+  def search
+    @bookings = Booking.search(
+      params[:search],
+      fields: [:name],
+      match: :word_start,
+      where: {
+        booking_date: { gt: Date.today }
+      }
+    )
+    @bookings = Booking.search(where: { booking_date: { gt: Date.today }}) unless params[:search].present?
   end
 
   private

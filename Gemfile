@@ -74,3 +74,6 @@ end
 gem "devise", "~> 4.9"
 
 gem "pundit", "~> 2.3"
+
+gem "searchkick", "~> 5.3"
+gem "elasticsearch", "~> 8.10"

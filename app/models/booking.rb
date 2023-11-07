@@ -1,5 +1,8 @@
 class Booking < ApplicationRecord
-	validates :booking_date, presence: true
+	# elasticserach
+	searchkick
+
+	validates :booking_date, :name, presence: true
 	validate :validating_booking_date
 
 	belongs_to :user
